@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chrome History Charts</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../cal-heatmap-3.6.1/cal-heatmap.css">
+    <style>
+      body {
+        font-family: 'Roboto', sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Duration between wake up and go sleep</p>
+    <div id="upDownDuration"></div>
+    <p>Sites visited between wake up and go sleep</p>
+    <div id="sitesPerDay"></div>
+    <p>Sites per "wake up and go sleep"-hour</p>
+    <div id="sitesPerDayPerHour"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+    <script src="../cal-heatmap-3.6.1/cal-heatmap.js"></script>
+    <script type="text/javascript">
+      var upDownDuration = <%= upDownDuration %>;
+      var sitesPerDay = <%= sitesPerDay %>;
+      var sitesPerDayPerHour = <%= sitesPerDayPerHour %>;
+      var upDownDurationMap = new CalHeatMap();
+	    upDownDurationMap.init({
+        itemSelector: '#upDownDuration',
+        data: upDownDuration,
+        domain: 'month',
+        subDomain: 'x_day',
+        domainGutter: 20,
+        range: 4,
+        start: new Date(2016, 09),
+        itemName: ['hour', 'hours'],
+        legend: [4, 8, 12, 16, 20, 24]
+      });
+      var sitesPerDayMap = new CalHeatMap();
+	    sitesPerDayMap.init({
+        itemSelector: '#sitesPerDay',
+        data: sitesPerDay,
+        domain: 'month',
+        subDomain: 'x_day',
+        domainGutter: 20,
+        range: 4,
+        start: new Date(2016, 09),
+        itemName: ['visit', 'visits'],
+        legend: [300, 600, 900, 1200, 1500]
+      });
+      var sitesPerDayPerHourMap = new CalHeatMap();
+	    sitesPerDayPerHourMap.init({
+        itemSelector: '#sitesPerDayPerHour',
+        data: sitesPerDayPerHour,
+        domain: 'month',
+        subDomain: 'x_day',
+        domainGutter: 20,
+        range: 4,
+        start: new Date(2016, 09),
+        itemName: ['visit per hour', 'visits per hour'],
+        legend: [20, 40, 60, 80, 100]
+      });
+    </script>
+  </body>
+</html>
